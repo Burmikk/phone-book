@@ -1,18 +1,18 @@
-import { useState, useMemo } from 'react';
-import styles from './login.module.scss';
-import { useDispatch } from 'react-redux';
-import { login } from 'redux/auth/auth-operations';
-import { RotatingLines } from 'react-loader-spinner';
+import { useState, useMemo } from "react";
+import styles from "./login.module.scss";
+import { useDispatch } from "react-redux";
+import { login } from "redux/auth/auth-operations";
+import { RotatingLines } from "react-loader-spinner";
 
-import { useSelector } from 'react-redux';
-import { selectorLoading, selectorError } from 'redux/auth/auth-selectors';
+import { useSelector } from "react-redux";
+import { selectorLoading, selectorError } from "redux/auth/auth-selectors";
 
-import { ToastContainer, toast,Slide } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const INITIAL_STATE = {
-  email: '',
-  password: '',
+  email: "",
+  password: "",
 };
 
 const LogIn = () => {
@@ -22,33 +22,33 @@ const LogIn = () => {
   const loading = useSelector(selectorLoading);
   const error = useSelector(selectorError);
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     onSubmit(state);
     setState({ ...INITIAL_STATE });
   };
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    setState(prevState => {
+    setState((prevState) => {
       return { ...prevState, [name]: value };
     });
   };
 
-  const onSubmit = state => {
+  const onSubmit = (state) => {
     dispatch(login(state));
   };
 
   const notify = () =>
-    toast.error('Something went wrong, check your email and password', {
-      position: 'top-center',
+    toast.error("Something went wrong, check your email and password", {
+      position: "top-center",
       autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: 'colored',
+      theme: "colored",
     });
 
   useMemo(() => {
@@ -91,10 +91,10 @@ const LogIn = () => {
             onChange={handleChange}
             required
           />
-          <button className={styles.btn}>Sign up</button>
+          <button className={styles.btn}>Log In</button>
         </form>
       )}
-      <ToastContainer transition={Slide}/>
+      <ToastContainer transition={Slide} />
     </div>
   );
 };
