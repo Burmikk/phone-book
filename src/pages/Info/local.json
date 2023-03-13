@@ -12,7 +12,7 @@
     "ua": "React дозволяє використовувати два типи маршрутів: публічні та приватні маршрути. Публічний маршрут дозволяє користувачам переглядати сторінки About та Sign Up / Log In. Приватний маршрут вимагає, щоб користувачі увійшли в систему, щоб отримати доступ до всіх функцій додатку, включаючи можливість додавати, видаляти і фільтрувати контакти."
   },
   "title4": {
-    "en": "The application's robust features and user-friendly interface that helps users manage their phone contacts effectively.",
+    "en": "The application's robust features and user-friendly interface help users manage their phone contacts effectively.",
     "ua": "Надійні функції програми та зручний інтерфейс допомагають користувачам ефективно керувати своїми телефонними контактами."
   }
 }
