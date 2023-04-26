@@ -42,7 +42,9 @@
 }
 
 .error {
-  text-align: center;
-  color: white;
-  font-size: 32px;
+  margin-top: 0;
+  color: red;
+  &::first-letter {
+    text-transform: uppercase;
+  }
 }

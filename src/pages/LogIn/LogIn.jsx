@@ -1,42 +1,36 @@
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
 import styles from "./login.module.scss";
 import { useDispatch } from "react-redux";
 import { login } from "redux/auth/auth-operations";
 import { RotatingLines } from "react-loader-spinner";
-
 import { useSelector } from "react-redux";
 import { selectorLoading, selectorError } from "redux/auth/auth-selectors";
-
+// Для отображения нотификашек
 import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+// Для работы с библиотекой Formik
+import { Field, Form, Formik, ErrorMessage } from "formik";
+// Для валидации форм
+import { object, string, number, date, InferType } from "yup";
 
-const INITIAL_STATE = {
+const userSchema = object({
+  email: string().email().required(),
+  password: string().min(7).required(),
+});
+
+const initialValues = {
   email: "",
   password: "",
 };
 
 const LogIn = () => {
-  const [state, setState] = useState({ ...INITIAL_STATE });
   const dispatch = useDispatch();
-
   const loading = useSelector(selectorLoading);
   const error = useSelector(selectorError);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    onSubmit(state);
-    setState({ ...INITIAL_STATE });
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setState((prevState) => {
-      return { ...prevState, [name]: value };
-    });
-  };
-
-  const onSubmit = (state) => {
-    dispatch(login(state));
+  const handleSubmit = (values, actions) => {
+    dispatch(login(values));
+    actions.resetForm();
   };
 
   const notify = () =>
@@ -57,8 +51,6 @@ const LogIn = () => {
     }
   }, [error]);
 
-  const { email, password } = state;
-
   return (
     <div>
       {loading ? (
@@ -72,27 +64,27 @@ const LogIn = () => {
           />
         </div>
       ) : (
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <label>Email</label>
-          <input
-            className={styles.input}
-            value={email}
-            type="email"
-            name="email"
-            onChange={handleChange}
-            required
-          />
-          <label>Password</label>
-          <input
-            className={styles.input}
-            value={password}
-            type="password"
-            name="password"
-            onChange={handleChange}
-            required
-          />
-          <button className={styles.btn}>Log In</button>
-        </form>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={userSchema}
+          onSubmit={handleSubmit}
+        >
+          <Form className={styles.form}>
+            <label>Email</label>
+            <Field className={styles.input} type="email" name="email" />
+            <ErrorMessage
+              name="email"
+              render={(msg) => <p className={styles.error}>{msg}</p>}
+            />
+            <label>Password</label>
+            <Field className={styles.input} type="password" name="password" />
+            <ErrorMessage
+              name="password"
+              render={(msg) => <p className={styles.error}>{msg}</p>}
+            />
+            <button className={styles.btn}>Log In</button>
+          </Form>
+        </Formik>
       )}
       <ToastContainer transition={Slide} />
     </div>
