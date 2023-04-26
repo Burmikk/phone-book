@@ -1,27 +1,26 @@
 @import-normalize; /* bring in normalize.css styles */
 
 body {
-  background-image: url(/Retro_Telephone_479953.jpeg);
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+    background-image: url(/src/img/Retro_Telephone_479953.jpeg);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 
-  margin: 0;
-  font-family: 'Roboto', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 button {
-  font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
 :root {
-  --primary-background-color: rgba(255, 255, 255, 0.6);
+    --primary-background-color: rgba(255, 255, 255, 0.6);
 }
